@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import bookstorejoakim.domain.CategoryRepository;
 import bookstorejoakim.domain.Book;
 import bookstorejoakim.domain.BookRepository;
 
@@ -14,7 +15,9 @@ import bookstorejoakim.domain.BookRepository;
 public class BookController {
 
 	@Autowired
-	private BookRepository repository; 
+	private BookRepository repository;
+	@Autowired
+	private CategoryRepository crepository; 
 	
 		 @RequestMapping (value="/hello")
 		 public String helloWorld() {
@@ -30,6 +33,7 @@ public class BookController {
 		    @RequestMapping(value = "/add")
 		    public String addbook(Model model){
 		    	model.addAttribute("book", new Book());
+		    	model.addAttribute("category", crepository.findAll());
 		        return "addbook";
 		    }     
 		    
